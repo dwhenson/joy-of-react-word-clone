@@ -1,19 +1,19 @@
 import React from "react";
 
-function WordInput({ guesses, setGuesses }) {
-  const [word, setWord] = React.useState("");
+function WordInput({ handleGuessSubmit }) {
+  const [tentativeGuess, setTentativeGuess] = React.useState("");
 
   function handleWordSubmit(event) {
     event.preventDefault();
-    if (word.length !== 5) return;
-    setGuesses([...guesses, word]);
-    setWord("");
+    if (tentativeGuess.length !== 5) return;
+    handleGuessSubmit(tentativeGuess);
+    setTentativeGuess("");
   }
 
   function handleWordChange(event) {
-    if (word.length >= 5) return;
-    if (!/^[a-zA-Z]+$/.test(event.target.value.at(-1))) return;
-    setWord(event.target.value.toUpperCase());
+    if (tentativeGuess.length >= 5) return;
+    if (!/[a-zA-Z]/.test(event.target.value.at(-1))) return;
+    setTentativeGuess(event.target.value.toUpperCase());
   }
 
   return (
@@ -23,7 +23,7 @@ function WordInput({ guesses, setGuesses }) {
         required
         id="guess-input"
         type="text"
-        value={word}
+        value={tentativeGuess}
         onChange={handleWordChange}
         minLength={5}
         maxLength={5}
