@@ -1,6 +1,6 @@
 import React from "react";
 
-function WordInput({ handleGuessSubmit }) {
+function WordInput({ handleGuessSubmit, disabled }) {
   const [tentativeGuess, setTentativeGuess] = React.useState("");
 
   function handleWordSubmit(event) {
@@ -27,6 +27,7 @@ function WordInput({ handleGuessSubmit }) {
         onChange={handleWordChange}
         minLength={5}
         maxLength={5}
+        disabled={disabled}
       />
     </form>
   );
